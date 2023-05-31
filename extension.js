@@ -5,6 +5,11 @@ const vscode = require('vscode');
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
 
+function scan(config) {
+	vscode.window.showInformationMessage('scan:'+config);
+	vscode.commands.executeCommand('zscan.ping');
+}
+
 /**
  * @param {vscode.ExtensionContext} context
  */
@@ -17,19 +22,25 @@ function activate(context) {
 	// The command has been defined in the package.json file
 	// Now provide the implementation of the command with  registerCommand
 	// The commandId parameter must match the command field in package.json
-	let disposable = vscode.commands.registerCommand('zscan.helloWorld', function () {
+	let disposable = vscode.commands.registerCommand('zscan.ping', function () {
 		// The code you place here will be executed every time your command is executed
 
 		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World from zscan!');
-		vscode.window.showInformationMessage('Hello World from zscan!');
+		vscode.window.showInformationMessage('pong!');
 	});
 
+	
+	let disposable2 = vscode.commands.registerCommand('zscan.scan',scan('test'))
+	
 	context.subscriptions.push(disposable);
+	context.subscriptions.push(disposable2)
 }
 
 // This method is called when your extension is deactivated
-function deactivate() {}
+function deactivate() {
+
+	vscode.window.showInformationMessage("zscan quit!")
+}
 
 module.exports = {
 	activate,

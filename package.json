@@ -3,19 +3,30 @@
   "displayName": "zscan",
   "description": "一款基于vscode的扫描器。",
   "version": "0.0.1",
+  "icon": "static/images/favicon-32x32.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zmf963/zscan.git"
+  },
   "engines": {
     "vscode": "^1.78.0"
   },
-  "categories": [
+  "categories": [ 
     "Other"
   ],
   "activationEvents": [],
   "main": "./extension.js",
   "contributes": {
-    "commands": [{
-      "command": "zscan.helloWorld",
-      "title": "Hello World"
-    }]
+    "commands": [
+      {
+        "command": "zscan.ping",
+        "title": "zscan ping"
+      },
+      {
+        "command": "zscan.scan",
+        "title": "zscan scan"
+      }
+    ]
   },
   "scripts": {
     "lint": "eslint .",
