@@ -11,12 +11,21 @@
   "engines": {
     "vscode": "^1.78.0"
   },
-  "categories": [ 
+  "categories": [
     "Other"
   ],
-  "activationEvents": [],
-  "main": "./extension.js",
+  "publisher": "zmf96",
+  "activationEvents": [
+    "*"
+  ],
+  "main": "./src/extension.js",
   "contributes": {
+    "viewsWelcome": [
+      {
+        "view": "zscanView",
+        "contents": "No node dependencies found [learn more](https://www.npmjs.com/).\n[Add Dependency](command:nodeDependencies.addEntry)"
+      }
+    ],
     "commands": [
       {
         "command": "zscan.ping",
@@ -26,22 +35,49 @@
         "command": "zscan.scan",
         "title": "zscan scan"
       }
-    ]
-  },
-  "scripts": {
-    "lint": "eslint .",
-    "pretest": "yarn run lint",
-    "test": "node ./test/runTest.js"
-  },
-  "devDependencies": {
-    "@types/vscode": "^1.78.0",
-    "@types/glob": "^8.1.0",
-    "@types/mocha": "^10.0.1",
-    "@types/node": "16.x",
-    "eslint": "^8.39.0",
-    "glob": "^8.1.0",
-    "mocha": "^10.2.0",
-    "typescript": "^5.0.4",
-    "@vscode/test-electron": "^2.3.0"
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "zscanView",
+          "title": "ZScan",
+          "icon": "static/images/favicon-32x32.png"
+        }
+      ]
+    },
+    "views": {
+      "zscanView": [
+        {
+          "id": "zscan-view-index",
+          "name": "导航页",
+          "icon": "static/images/favicon-32x32.png"
+        }
+      ]
+    },
+    "menus": {
+      "view/title": [
+        {
+          "command": "zscan.ping",
+          "when": "view == zscan-view-index",
+          "group": "navigation@1"
+        }
+      ]
+    },
+    "scripts": {
+      "lint": "eslint .",
+      "pretest": "yarn run lint",
+      "test": "node ./src/test/runTest.js"
+    },
+    "devDependencies": {
+      "@types/vscode": "^1.78.0",
+      "@types/glob": "^8.1.0",
+      "@types/mocha": "^10.0.1",
+      "@types/node": "16.x",
+      "eslint": "^8.39.0",
+      "glob": "^8.1.0",
+      "mocha": "^10.2.0",
+      "typescript": "^5.0.4",
+      "@vscode/test-electron": "^2.3.0"
+    }
   }
 }
