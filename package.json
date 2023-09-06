@@ -2,7 +2,7 @@
   "name": "zscan",
   "displayName": "zscan",
   "description": "一款基于vscode的扫描器。",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "icon": "static/images/favicon-32x32.png",
   "repository": {
     "type": "git",
@@ -20,10 +20,26 @@
   ],
   "main": "./src/extension.js",
   "contributes": {
+    "configuration": {
+      "type": "object",
+      "title": "zscan config",
+      "properties": {
+        "zscanConfig.workDir": {
+          "type": "string",
+          "default": "~/.zscan",
+          "description": "工作目录"
+        },
+        "zscanConfig.serverIP": {
+          "type": "string",
+          "default": "dev.local",
+          "description": "server节点IP"
+        }
+      }
+    },
     "viewsWelcome": [
       {
         "view": "zscanView",
-        "contents": "No node dependencies found [learn more](https://www.npmjs.com/).\n[Add Dependency](command:nodeDependencies.addEntry)"
+        "contents": "hello,zscan!"
       }
     ],
     "commands": [
@@ -34,6 +50,10 @@
       {
         "command": "zscan.scan",
         "title": "zscan scan"
+      },
+      {
+        "command": "zscan.index",
+        "title": "zscan index"
       }
     ],
     "viewsContainers": {
@@ -49,16 +69,45 @@
       "zscanView": [
         {
           "id": "zscan-view-index",
-          "name": "导航页",
+          "name": "首页",
           "icon": "static/images/favicon-32x32.png"
+        },
+        {
+          "id": "zscan-view-assets",
+          "name": "资产管理"
+        },
+        {
+          "id": "zscan-view-task",
+          "name": "任务管理"
+        },
+        {
+          "id": "zscan-view-node",
+          "name": "节点管理"
+        },
+        {
+          "id": "zscan-view-finger",
+          "name": "指纹管理"
+        },
+        {
+          "id": "zscan-view-poc",
+          "name": "POC管理"
+        },
+        {
+          "id": "zscan-view-vulenv",
+          "name": "漏洞靶场"
         }
       ]
     },
     "menus": {
-      "view/title": [
+      "editor/context": [
         {
           "command": "zscan.ping",
-          "when": "view == zscan-view-index",
+          "when": "editorFocus",
+          "group": "navigation@1"
+        },
+        {
+          "command": "zscan.scan",
+          "when": "editorFocus",
           "group": "navigation@1"
         }
       ]
